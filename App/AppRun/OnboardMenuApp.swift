@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import NetworkMonitor
 
 @main
 struct OnboardMenuApp: App {
+    
+    private var networkMonitor = NetworkMonitor()
+    
     var body: some Scene {
         WindowGroup {
-            MenuView()
+            DI.makeMenuView()
+                .environmentObject(networkMonitor)
         }
     }
 }
