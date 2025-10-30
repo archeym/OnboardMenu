@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		688CC6252EB356D500BFB655 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 688CC6212EB356D500BFB655 /* Assets.xcassets */; };
+		688CC6262EB356D500BFB655 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC6222EB356D500BFB655 /* MenuView.swift */; };
+		688CC6272EB356D500BFB655 /* OnboardMenuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC6232EB356D500BFB655 /* OnboardMenuApp.swift */; };
+		688CC62A2EB356D700BFB655 /* OnboardMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC6282EB356D700BFB655 /* OnboardMenuTests.swift */; };
+		688CC62E2EB356DB00BFB655 /* OnboardMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC62B2EB356DB00BFB655 /* OnboardMenuUITests.swift */; };
+		688CC62F2EB356DB00BFB655 /* OnboardMenuUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC62C2EB356DB00BFB655 /* OnboardMenuUITestsLaunchTests.swift */; };
+		688CC6322EB3597300BFB655 /* NetworkMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 688CC6312EB3597300BFB655 /* NetworkMonitor */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		688CC6052EB356CF00BFB655 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,31 +37,20 @@
 		688CC5F72EB356CC00BFB655 /* OnboardMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnboardMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		688CC6042EB356CF00BFB655 /* OnboardMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnboardMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		688CC60E2EB356CF00BFB655 /* OnboardMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnboardMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		688CC6212EB356D500BFB655 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		688CC6222EB356D500BFB655 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		688CC6232EB356D500BFB655 /* OnboardMenuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardMenuApp.swift; sourceTree = "<group>"; };
+		688CC6282EB356D700BFB655 /* OnboardMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardMenuTests.swift; sourceTree = "<group>"; };
+		688CC62B2EB356DB00BFB655 /* OnboardMenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardMenuUITests.swift; sourceTree = "<group>"; };
+		688CC62C2EB356DB00BFB655 /* OnboardMenuUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardMenuUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		688CC5F92EB356CC00BFB655 /* OnboardMenu */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OnboardMenu;
-			sourceTree = "<group>";
-		};
-		688CC6072EB356CF00BFB655 /* OnboardMenuTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OnboardMenuTests;
-			sourceTree = "<group>";
-		};
-		688CC6112EB356CF00BFB655 /* OnboardMenuUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OnboardMenuUITests;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		688CC5F42EB356CC00BFB655 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688CC6322EB3597300BFB655 /* NetworkMonitor in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,9 +74,8 @@
 		688CC5EE2EB356CC00BFB655 = {
 			isa = PBXGroup;
 			children = (
-				688CC5F92EB356CC00BFB655 /* OnboardMenu */,
-				688CC6072EB356CF00BFB655 /* OnboardMenuTests */,
-				688CC6112EB356CF00BFB655 /* OnboardMenuUITests */,
+				688CC6242EB356D500BFB655 /* App */,
+				688CC64D2EB3834300BFB655 /* Tests */,
 				688CC5F82EB356CC00BFB655 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +88,282 @@
 				688CC60E2EB356CF00BFB655 /* OnboardMenuUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		688CC6242EB356D500BFB655 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6332EB35E1E00BFB655 /* AppRun */,
+				688CC6342EB35E9400BFB655 /* Shared */,
+				688CC63C2EB380E300BFB655 /* Data */,
+				688CC63D2EB380F200BFB655 /* Domain */,
+				688CC6352EB35EE600BFB655 /* Features */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		688CC6292EB356D700BFB655 /* OnboardMenuTests */ = {
+			isa = PBXGroup;
+			children = (
+				688CC64E2EB3838700BFB655 /* DomainTests */,
+				688CC64F2EB3839D00BFB655 /* DataTests */,
+				688CC6502EB383A900BFB655 /* PresentationTests */,
+				688CC6512EB383E900BFB655 /* Support */,
+				688CC6282EB356D700BFB655 /* OnboardMenuTests.swift */,
+			);
+			path = OnboardMenuTests;
+			sourceTree = "<group>";
+		};
+		688CC62D2EB356DB00BFB655 /* OnboardMenuUITests */ = {
+			isa = PBXGroup;
+			children = (
+				688CC62B2EB356DB00BFB655 /* OnboardMenuUITests.swift */,
+				688CC62C2EB356DB00BFB655 /* OnboardMenuUITestsLaunchTests.swift */,
+			);
+			path = OnboardMenuUITests;
+			sourceTree = "<group>";
+		};
+		688CC6332EB35E1E00BFB655 /* AppRun */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6232EB356D500BFB655 /* OnboardMenuApp.swift */,
+			);
+			path = AppRun;
+			sourceTree = "<group>";
+		};
+		688CC6342EB35E9400BFB655 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				688CC63B2EB3660500BFB655 /* Infrastructure */,
+				688CC63A2EB365F800BFB655 /* Core */,
+				688CC6372EB35F4A00BFB655 /* DesignSystem */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		688CC6352EB35EE600BFB655 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6362EB35F0200BFB655 /* MenuFeature */,
+				688CC6422EB381BC00BFB655 /* PaymentFeature */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		688CC6362EB35F0200BFB655 /* MenuFeature */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6382EB35F5800BFB655 /* Presentation */,
+				688CC6432EB381F300BFB655 /* Support */,
+			);
+			path = MenuFeature;
+			sourceTree = "<group>";
+		};
+		688CC6372EB35F4A00BFB655 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6212EB356D500BFB655 /* Assets.xcassets */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		688CC6382EB35F5800BFB655 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6462EB3823200BFB655 /* Views */,
+				688CC6452EB3822700BFB655 /* ViewModels */,
+				688CC6442EB3821B00BFB655 /* Components */,
+				688CC6392EB35FBB00BFB655 /* PreviewContent */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		688CC6392EB35FBB00BFB655 /* PreviewContent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PreviewContent;
+			sourceTree = "<group>";
+		};
+		688CC63A2EB365F800BFB655 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		688CC63B2EB3660500BFB655 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		688CC63C2EB380E300BFB655 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				688CC63E2EB3810600BFB655 /* API */,
+				688CC63F2EB3811400BFB655 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		688CC63D2EB380F200BFB655 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6412EB3814F00BFB655 /* Repositories */,
+				688CC6402EB3812D00BFB655 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		688CC63E2EB3810600BFB655 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		688CC63F2EB3811400BFB655 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		688CC6402EB3812D00BFB655 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		688CC6412EB3814F00BFB655 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		688CC6422EB381BC00BFB655 /* PaymentFeature */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6482EB3826200BFB655 /* Presentation */,
+				688CC6472EB3825400BFB655 /* Support */,
+			);
+			path = PaymentFeature;
+			sourceTree = "<group>";
+		};
+		688CC6432EB381F300BFB655 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		688CC6442EB3821B00BFB655 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		688CC6452EB3822700BFB655 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		688CC6462EB3823200BFB655 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6222EB356D500BFB655 /* MenuView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		688CC6472EB3825400BFB655 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		688CC6482EB3826200BFB655 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				688CC64C2EB382B500BFB655 /* Views */,
+				688CC64B2EB382AC00BFB655 /* ViewModels */,
+				688CC64A2EB3829300BFB655 /* Components */,
+				688CC6492EB3827F00BFB655 /* PreviewContent */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		688CC6492EB3827F00BFB655 /* PreviewContent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PreviewContent;
+			sourceTree = "<group>";
+		};
+		688CC64A2EB3829300BFB655 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		688CC64B2EB382AC00BFB655 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		688CC64C2EB382B500BFB655 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		688CC64D2EB3834300BFB655 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				688CC6292EB356D700BFB655 /* OnboardMenuTests */,
+				688CC62D2EB356DB00BFB655 /* OnboardMenuUITests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		688CC64E2EB3838700BFB655 /* DomainTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DomainTests;
+			sourceTree = "<group>";
+		};
+		688CC64F2EB3839D00BFB655 /* DataTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataTests;
+			sourceTree = "<group>";
+		};
+		688CC6502EB383A900BFB655 /* PresentationTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PresentationTests;
+			sourceTree = "<group>";
+		};
+		688CC6512EB383E900BFB655 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,11 +381,9 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				688CC5F92EB356CC00BFB655 /* OnboardMenu */,
-			);
 			name = OnboardMenu;
 			packageProductDependencies = (
+				688CC6312EB3597300BFB655 /* NetworkMonitor */,
 			);
 			productName = OnboardMenu;
 			productReference = 688CC5F72EB356CC00BFB655 /* OnboardMenu.app */;
@@ -129,9 +401,6 @@
 			);
 			dependencies = (
 				688CC6062EB356CF00BFB655 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				688CC6072EB356CF00BFB655 /* OnboardMenuTests */,
 			);
 			name = OnboardMenuTests;
 			packageProductDependencies = (
@@ -152,9 +421,6 @@
 			);
 			dependencies = (
 				688CC6102EB356CF00BFB655 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				688CC6112EB356CF00BFB655 /* OnboardMenuUITests */,
 			);
 			name = OnboardMenuUITests;
 			packageProductDependencies = (
@@ -195,6 +461,9 @@
 			);
 			mainGroup = 688CC5EE2EB356CC00BFB655;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				688CC6302EB3597300BFB655 /* XCRemoteSwiftPackageReference "NetworkMonitor-iOS" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 688CC5F82EB356CC00BFB655 /* Products */;
 			projectDirPath = "";
@@ -212,6 +481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688CC6252EB356D500BFB655 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +506,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688CC6262EB356D500BFB655 /* MenuView.swift in Sources */,
+				688CC6272EB356D500BFB655 /* OnboardMenuApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688CC62A2EB356D700BFB655 /* OnboardMenuTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +523,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				688CC62E2EB356DB00BFB655 /* OnboardMenuUITests.swift in Sources */,
+				688CC62F2EB356DB00BFB655 /* OnboardMenuUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +853,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		688CC6302EB3597300BFB655 /* XCRemoteSwiftPackageReference "NetworkMonitor-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/archeym/NetworkMonitor-iOS.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		688CC6312EB3597300BFB655 /* NetworkMonitor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 688CC6302EB3597300BFB655 /* XCRemoteSwiftPackageReference "NetworkMonitor-iOS" */;
+			productName = NetworkMonitor;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 688CC5EF2EB356CC00BFB655 /* Project object */;
 }
