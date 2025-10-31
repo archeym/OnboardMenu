@@ -1,5 +1,5 @@
 //
-//  ViewModifiers.swift
+//  CornerRadiusStyle.swift
 //  OnboardMenu
 //
 //  Created by Arkadijs Makarenko on 30/10/2025.

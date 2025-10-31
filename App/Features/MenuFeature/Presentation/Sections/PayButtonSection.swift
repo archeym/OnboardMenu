@@ -16,9 +16,10 @@ struct PayButtonSection: View {
     let baseEURPrice: Decimal
     @Binding var selectedCurrency: Currency
     let priceDisplay: (Decimal) async -> (primary: String, extras: [String])
+    
     var onButtonPayTap: (() -> Void)? = nil
     var onSaleTypeChange: ((SaleType) -> Void)? = nil
-
+    
     @State private var displayText: (primary: String, extras: [String]) = ("", [])
     @State private var showTypeSheet = false
     @State private var saleType: SaleType = .retail
@@ -37,8 +38,7 @@ struct PayButtonSection: View {
                     .frame(width: geo.size.width * 0.65, height: 44)
                     .background(Color.accentColor)
                     .cornerRadiusStyle(radius: 20, corners: [.topLeft, .bottomLeft])
-                }
-                .buttonStyle(.plain)
+                }.buttonStyle(.plain)
 
                 // 35% Sale type button with rounded right corners
                 Button {
@@ -56,9 +56,7 @@ struct PayButtonSection: View {
                 }
                 .buttonStyle(.plain)
                 .sheet(isPresented: $showTypeSheet) {
-                    // PayTypeSheet must bind to `saleType` and call onClose
                     PayTypeSheet(selected: $saleType) {
-                        // Persist the new selection and notify parent
                         store.saleType = saleType
                         onSaleTypeChange?(saleType)
                         showTypeSheet = false
@@ -69,7 +67,7 @@ struct PayButtonSection: View {
         .frame(height: 44)
         .padding(.bottom, 5)
         .task {
-            // on the initial load read persisted sale type and compute price text
+            //on the initial load read persisted saleType and recompute displayText
             saleType = store.saleType
             await recompute()
         }
