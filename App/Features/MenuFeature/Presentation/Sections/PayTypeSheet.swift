@@ -34,13 +34,13 @@ struct PayTypeSheet: View {
                     .buttonStyle(.plain)
                 }
             }
-            .navigationTitle("Sale type")
+            .navigationTitle("Select Type")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Close", action: onClose)
                 }
             }
-        }
-        .presentationDetents([.height(550), .medium])
+        }.presentationDetents([.height(550), .medium])
     }
 }

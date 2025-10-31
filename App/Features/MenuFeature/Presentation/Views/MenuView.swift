@@ -10,7 +10,12 @@ import NetworkMonitor
 
 struct MenuView: View {
     
+    // Currency + formatting VM
     @StateObject var vm: MenuViewModel
+    // Networking VM that loads the menu
+    @StateObject var netVM: MenuNetworkingViewModel
+    
+    let merchantId: Int
     @EnvironmentObject private var networkMonitor: NetworkMonitor
     
     private let baseEURPrice: Decimal = Decimal(string: "3.50")!
@@ -23,41 +28,74 @@ struct MenuView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .top) {
-                VStack(spacing: 10) {
-                    
-                    ScrollView {
-                        LazyVGrid(columns: gridColumns, spacing: 12) {
-                            ForEach(ProductGrid.demo) { item in
-                                ProductCard(
-                                    title: item.title,
-                                    imageURL: item.imageURL,
-                                    priceText: item.priceText,
-                                    onMinus: { print("Minus \(item.title)") },
-                                    onPlus: { print("Plus \(item.title)") }
+                Group {
+                    if let menus = netVM.menuResource.value {
+                        let items = netVM.products(from: menus)
+                        if items.isEmpty {
+                            EmptyPlaceholderView(
+                                systemImage: "cart",
+                                title: "No products",
+                                message: "Pull to refresh to try again."
+                            )
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        } else {
+                            ScrollView {
+                                LazyVGrid(columns: gridColumns, spacing: 12) {
+                                    ForEach(items) { item in
+                                        ProductCard(
+                                            title: item.name,
+                                            imageURL: item.photoURL,
+                                            priceText: item.priceText,
+                                            onMinus: { print("Minus \(item.name)") },
+                                            onPlus:  { print("Plus \(item.name)")  }
+                                        )
+                                    }
+                                }
+                                .padding(.horizontal)
+                                .padding(.bottom, 140)
+                            }
+                            .safeAreaInset(edge: .bottom) {
+                                VStack(spacing: 8) {
+                                    PayButtonSection(
+                                        name: "PAY",
+                                        baseEURPrice: baseEURPrice,
+                                        selectedCurrency: $vm.selectedCurrency,
+                                        priceDisplay: { await vm.recomputeExtras(for: $0) },
+                                        onButtonPayTap: { dump("onButtonPayTap") }
+                                    )
+                                    
+                                    ExtraCurrencySection(
+                                        baseEURPrice: baseEURPrice,
+                                        selectedCurrency: $vm.selectedCurrency,
+                                        priceDisplay: { await vm.recomputeExtras(for: $0) }
+                                    )
+                                }
+                                .padding(.horizontal)
+                                .padding(.top, 8)
+                                .background(.ultraThinMaterial)
+                                .overlay(
+                                    Divider().opacity(0.3),
+                                    alignment: .top
                                 )
                             }
                         }
+                    } else {
+                        if netVM.menuResource.isIdle {
+                            EmptyPlaceholderView(
+                                systemImage: "cart",
+                                title: "No products yet",
+                                message: "Pull to refresh to load products."
+                            )
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
                     }
-                    
-                    PayButtonSection(
-                        name: "PAY",
-                        baseEURPrice: baseEURPrice,
-                        selectedCurrency: $vm.selectedCurrency,
-                        priceDisplay: {
-                            await vm.recomputeExtras(for: $0)
-                        },
-                        onButtonPayTap: {
-                            dump("onButtonPayTap")
-                        }
-                    )
-
-                    ExtraCurrencySection(
-                        baseEURPrice: baseEURPrice,
-                        selectedCurrency: $vm.selectedCurrency,
-                        priceDisplay: {
-                            await vm.recomputeExtras(for: $0)
-                        }
-                    )
+                }
+                
+                if netVM.menuResource.isLoading {
+                    ProgressView("Loading…")
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
                 }
                 
                 if !networkMonitor.isConnected {
@@ -66,9 +104,35 @@ struct MenuView: View {
                 }
             }
             .disabled(!networkMonitor.isConnected)
-            .padding(.horizontal)
             .navigationTitle("Products")
             .navigationBarTitleDisplayMode(.inline)
+            .alert(
+                "Error",
+                isPresented: Binding(
+                    get: { netVM.menuResource.error != nil && !(netVM.menuResource.error?.isCancelled ?? false) },
+                    set: { presented in if !presented { netVM.clearError() } }
+                )
+            ) {
+                Button("OK", role: .cancel) { netVM.clearError() }
+            } message: {
+                Text(netVM.menuResource.error?.userMessage ?? "")
+            }
+            .task {
+                if netVM.menuResource.isIdle {
+                    await netVM.fetch(merchantId: merchantId)
+                }
+            }
+            .refreshable {
+                try? await Task.sleep(nanoseconds: 350_000_000)
+                await netVM.fetch(merchantId: merchantId)
+            }
+            .onChange(of: networkMonitor.isConnected) { _, isOn in
+                if isOn, netVM.menuResource.value == nil {
+                    Task {
+                        await netVM.fetch(merchantId: merchantId)
+                    }
+                }
+            }
         }
     }
 }

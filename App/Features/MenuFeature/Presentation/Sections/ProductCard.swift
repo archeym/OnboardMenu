@@ -24,7 +24,7 @@ struct ProductCard: View {
                 .padding(8)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
 
-            HStack(spacing: 10) {
+            HStack(spacing: 5) {
                 Button(action: onMinus) {
                     ZStack {
                         Circle().fill(Color.red)
@@ -55,7 +55,7 @@ struct ProductCard: View {
                     .lineLimit(1)
                     .shadow(radius: 3)
             }
-            .padding(.horizontal, 4)
+            .padding(.horizontal, 2)
             .padding(.vertical, 8)
             .frame(maxWidth: .infinity)
             .background(.black.opacity(0.35), in: RoundedRectangle(cornerRadius: 12))

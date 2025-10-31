@@ -46,6 +46,6 @@ struct CurrencyTypeSheetBuffered: View {
                     Button("Close", action: onClose)
                 }
             }
-        }
+        }.presentationDetents([.height(150), .medium])
     }
 }

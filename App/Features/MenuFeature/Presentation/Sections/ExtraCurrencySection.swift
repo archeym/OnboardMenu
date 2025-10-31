@@ -18,9 +18,9 @@ struct ExtraCurrencySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(extras.joined(separator: " or "))
+            Text(extras.joined(separator: " | "))
                 .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.primary)
         }
         .contentShape(Rectangle())
         .onTapGesture { showCurrencySheet = true }

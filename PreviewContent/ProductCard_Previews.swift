@@ -30,11 +30,11 @@ struct ProductCard_Previews: PreviewProvider {
                 LazyVGrid(columns: gridColumns, spacing: 12) {
                     ForEach(ProductGrid.demo) { item in
                         ProductCard(
-                            title: item.title,
-                            imageURL: item.imageURL,
+                            title: item.name,
+                            imageURL: item.photoURL,
                             priceText: item.priceText,
-                            onMinus: { print("Minus \(item.title)") },
-                            onPlus: { print("Plus \(item.title)") }
+                            onMinus: { print("Minus \(item.name)") },
+                            onPlus: { print("Plus \(item.name)") }
                         )
                     }
                 }.padding()

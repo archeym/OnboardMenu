@@ -1,5 +1,5 @@
 //
-//  ModelTypes.swift
+//  Currency.swift
 //  OnboardMenu
 //
 //  Created by Arkadijs Makarenko on 30/10/2025.
@@ -18,10 +18,4 @@ enum Currency: String, Codable, CaseIterable, Sendable {
         case .GBP: "£"
         }
     }
-}
-
-struct Money: Equatable, Codable, Sendable {
-    let amount: Decimal
-    let currency: Currency
-    
 }

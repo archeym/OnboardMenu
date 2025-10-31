@@ -50,7 +50,7 @@ struct PayButtonSection: View {
                     }
                     .font(.subheadline.weight(.semibold))
                     .frame(width: geo.size.width * 0.35, height: 44)
-                    .background(Color.black.opacity(0.5))
+                    .background(Color.pink.opacity(0.8))
                     .foregroundStyle(Color.white)
                     .cornerRadiusStyle(radius: 20, corners: [.topRight, .bottomRight])
                 }

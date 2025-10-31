@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class MenuViewModel: ObservableObject {
+class MenuViewModel: ObservableObject {
 
     @Published var selectedCurrency: Currency {
         didSet {
