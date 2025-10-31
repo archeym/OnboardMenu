@@ -1,0 +1,100 @@
+name: OnboardMenu
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache SwiftPM
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/Library/Caches/org.swift.swiftpm
+            ~/.swiftpm
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: ${{ runner.os }}-spm-
+
+      - name: Resolve Dependencies
+        run: |
+          set -euo pipefail
+          xcodebuild -resolvePackageDependencies \
+            -scheme "OnboardMenu" \
+            -project "OnboardMenu.xcodeproj"
+
+      - name: Show SDKs & runtimes (debug)
+        run: |
+          set -euo pipefail
+          xcodebuild -showsdks
+          xcrun simctl list runtimes
+          xcrun simctl list devicetypes || true
+          xcodebuild -showdestinations -scheme "OnboardMenu" -project "OnboardMenu.xcodeproj" || true
+
+      - name: Detect iOS runtime
+        id: detect
+        shell: bash
+        run: |
+          set -euo pipefail
+          if xcrun simctl list runtimes | awk '/iOS/ && /available/ {found=1} END{exit !found}'; then
+            echo "has_sim=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_sim=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build (generic iOS Simulator)
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -scheme "OnboardMenu" \
+            -project "OnboardMenu.xcodeproj" \
+            -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Create & boot Simulator
+        if: steps.detect.outputs.has_sim == 'true'
+        id: sim
+        shell: bash
+        run: |
+          set -euo pipefail
+          RUNTIME_ID="$(xcrun simctl list runtimes | awk -F '[()]' '/iOS/ && /available/ {print $2}' | tail -n1)"
+          echo "Using runtime: $RUNTIME_ID"
+          if xcrun simctl list devicetypes | grep -q "iPhone 15 Pro$"; then
+            DEVICE_TYPE="com.apple.CoreSimulator.SimDeviceType.iPhone-15-Pro"
+          else
+            DEVICE_TYPE="$(xcrun simctl list devicetypes | awk -F '[()]' '/iPhone/ {print $2}' | tail -n1)"
+          fi
+          echo "Using device type: $DEVICE_TYPE"
+          UDID="$(xcrun simctl create 'CI-iPhone' "$DEVICE_TYPE" "$RUNTIME_ID")"
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl bootstatus "$UDID" -b
+
+      - name: Run Unit Tests on Simulator
+        if: steps.detect.outputs.has_sim == 'true'
+        env:
+          SIM_UDID: ${{ steps.sim.outputs.udid }}
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -scheme "OnboardMenu" \
+            -project "OnboardMenu.xcodeproj" \
+            -configuration Debug \
+            -destination "id=${SIM_UDID}" \
+            CODE_SIGNING_ALLOWED=NO \
+            test
+
+      - name: No simulator runtime available — skipping tests
+        if: steps.detect.outputs.has_sim != 'true'
+        run: echo "::notice title=Simulator not found::No iOS Simulator runtime on this runner/Xcode image. Built successfully; tests skipped."
