@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 enum DI {
     static func makeMenuView() -> some View {
         let rates = SimpleRatesRepository()
