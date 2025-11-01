@@ -51,6 +51,9 @@
 		689C77622EB5118000FB7893 /* MenuNetworkingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C77612EB5117B00FB7893 /* MenuNetworkingViewModel.swift */; };
 		689C77642EB514E900FB7893 /* EmptyPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C77632EB514E100FB7893 /* EmptyPlaceholderView.swift */; };
 		689C77662EB5157100FB7893 /* MoneyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C77652EB5157100FB7893 /* MoneyFormatter.swift */; };
+		68A6B9422EB5E8CB00CC07A3 /* UIImage+Downsampling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6B9412EB5E8C700CC07A3 /* UIImage+Downsampling.swift */; };
+		68A6B9442EB5E8E800CC07A3 /* CachedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6B9432EB5E8E500CC07A3 /* CachedImage.swift */; };
+		68A6B94A2EB5EB6200CC07A3 /* CachedFillBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A6B9492EB5EB6000CC07A3 /* CachedFillBackground.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +121,9 @@
 		689C77612EB5117B00FB7893 /* MenuNetworkingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNetworkingViewModel.swift; sourceTree = "<group>"; };
 		689C77632EB514E100FB7893 /* EmptyPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPlaceholderView.swift; sourceTree = "<group>"; };
 		689C77652EB5157100FB7893 /* MoneyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyFormatter.swift; sourceTree = "<group>"; };
+		68A6B9412EB5E8C700CC07A3 /* UIImage+Downsampling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Downsampling.swift"; sourceTree = "<group>"; };
+		68A6B9432EB5E8E500CC07A3 /* CachedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImage.swift; sourceTree = "<group>"; };
+		68A6B9492EB5EB6000CC07A3 /* CachedFillBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedFillBackground.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -477,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				688CC6692EB3A21A00BFB655 /* CornerRadiusStyle.swift */,
+				68A6B9492EB5EB6000CC07A3 /* CachedFillBackground.swift */,
 				689C77632EB514E100FB7893 /* EmptyPlaceholderView.swift */,
 			);
 			path = DesignSystem;
@@ -493,6 +500,7 @@
 		689C775E2EB50DCA00FB7893 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				68A6B9402EB5E8B600CC07A3 /* Utils */,
 				689C77472EB4FA0E00FB7893 /* APIEnvironment.swift */,
 				689C77492EB4FA5800FB7893 /* Endpoint.swift */,
 				689C774C2EB4FB3500FB7893 /* HTTPMethod.swift */,
@@ -501,6 +509,15 @@
 				689C775F2EB5107600FB7893 /* NetworkResource.swift */,
 			);
 			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		68A6B9402EB5E8B600CC07A3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				68A6B9412EB5E8C700CC07A3 /* UIImage+Downsampling.swift */,
+				68A6B9432EB5E8E500CC07A3 /* CachedImage.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -655,6 +672,7 @@
 				688CC6622EB3943A00BFB655 /* UserDefaultsCurrencyStore.swift in Sources */,
 				689C77662EB5157100FB7893 /* MoneyFormatter.swift in Sources */,
 				688CC65A2EB38BB400BFB655 /* ConvertPrices.swift in Sources */,
+				68A6B94A2EB5EB6200CC07A3 /* CachedFillBackground.swift in Sources */,
 				688CC6552EB3875300BFB655 /* Currency.swift in Sources */,
 				688CC65C2EB38C2100BFB655 /* SimpleRatesRepository.swift in Sources */,
 				688CC6272EB356D500BFB655 /* OnboardMenuApp.swift in Sources */,
@@ -669,10 +687,12 @@
 				688CC6572EB3898E00BFB655 /* RatesRepository.swift in Sources */,
 				689C775B2EB50CCC00FB7893 /* LoadMenu.swift in Sources */,
 				689C775D2EB50D2300FB7893 /* RemoteMenuRepository.swift in Sources */,
+				68A6B9422EB5E8CB00CC07A3 /* UIImage+Downsampling.swift in Sources */,
 				688CC6602EB38D4F00BFB655 /* PayButtonSection.swift in Sources */,
 				688CC66A2EB3A21B00BFB655 /* CornerRadiusStyle.swift in Sources */,
 				688CC6752EB3B1C000BFB655 /* SaleType.swift in Sources */,
 				688CC65E2EB38C8200BFB655 /* MenuViewModel.swift in Sources */,
+				68A6B9442EB5E8E800CC07A3 /* CachedImage.swift in Sources */,
 				689C77382EB4C16C00FB7893 /* ProductGrid.swift in Sources */,
 				688CC6792EB3B49400BFB655 /* SaleTypeStore.swift in Sources */,
 				688CC6642EB3947300BFB655 /* CurrencyStore.swift in Sources */,

@@ -63,25 +63,7 @@ struct ProductCard: View {
             .frame(maxHeight: .infinity, alignment: .bottom)
         }
         .aspectRatio(0.70, contentMode: .fit)// height is 1.7× width
-        .background {
-            if let url = imageURL {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let img):
-                        img.resizable().scaledToFill()
-                    case .empty:
-                        Color.gray.opacity(0.15)
-                    case .failure:
-                        Color.gray.opacity(0.25)
-                    @unknown default:
-                        Color.gray.opacity(0.15)
-                    }
-                }
-                .transition(.opacity)
-            } else {
-                Color.gray.opacity(0.15)
-            }
-        }
+        .productCachedBackground(imageURL) 
         .clipped()
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
