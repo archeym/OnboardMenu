@@ -18,8 +18,6 @@ struct MenuView: View {
     let merchantId: Int
     @EnvironmentObject private var networkMonitor: NetworkMonitor
     
-    private let baseEURPrice: Decimal = Decimal(string: "3.50")!
-    
     private let gridColumns = [
         GridItem(.flexible(), spacing: 12),
         GridItem(.flexible(), spacing: 12)
@@ -45,7 +43,7 @@ struct MenuView: View {
                                         ProductCard(
                                             title: item.name,
                                             imageURL: item.photoURL,
-                                            priceText: item.priceText,
+                                            priceText: vm.priceTextForCardSync(eurPrice: item.eurPrice ?? 0),
                                             onMinus: { print("Minus \(item.name)") },
                                             onPlus:  { print("Plus \(item.name)")  }
                                         )
@@ -58,14 +56,14 @@ struct MenuView: View {
                                 VStack(spacing: 8) {
                                     PayButtonSection(
                                         name: "PAY",
-                                        baseEURPrice: baseEURPrice,
+                                        baseEURPrice: 1,
                                         selectedCurrency: $vm.selectedCurrency,
                                         priceDisplay: { await vm.recomputeExtras(for: $0) },
                                         onButtonPayTap: { dump("onButtonPayTap") }
                                     )
                                     
                                     ExtraCurrencySection(
-                                        baseEURPrice: baseEURPrice,
+                                        baseEURPrice: 1,
                                         selectedCurrency: $vm.selectedCurrency,
                                         priceDisplay: { await vm.recomputeExtras(for: $0) }
                                     )
@@ -92,10 +90,9 @@ struct MenuView: View {
                 }
                 
                 if netVM.menuResource.isLoading {
-                    ProgressView("Loading…")
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    ProgressView("Loading")
+                        .padding(20)
+                        .background(.accent.opacity(0.3), in: RoundedRectangle(cornerRadius: 12))
                 }
                 
                 if !networkMonitor.isConnected {
@@ -117,6 +114,16 @@ struct MenuView: View {
             } message: {
                 Text(netVM.menuResource.error?.userMessage ?? "")
             }
+            .onChange(of: networkMonitor.isConnected) { _, isOn in
+                if isOn, netVM.menuResource.value == nil {
+                    Task {
+                        await netVM.fetch(merchantId: merchantId)
+                    }
+                }
+            }
+            .task {
+                await vm.warmRate(for: vm.selectedCurrency)
+            }
             .task {
                 if netVM.menuResource.isIdle {
                     await netVM.fetch(merchantId: merchantId)
@@ -125,13 +132,6 @@ struct MenuView: View {
             .refreshable {
                 try? await Task.sleep(nanoseconds: 350_000_000)
                 await netVM.fetch(merchantId: merchantId)
-            }
-            .onChange(of: networkMonitor.isConnected) { _, isOn in
-                if isOn, netVM.menuResource.value == nil {
-                    Task {
-                        await netVM.fetch(merchantId: merchantId)
-                    }
-                }
             }
         }
     }
